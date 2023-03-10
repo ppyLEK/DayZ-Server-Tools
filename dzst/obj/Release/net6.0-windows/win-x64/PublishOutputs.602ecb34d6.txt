@@ -1,0 +1,2 @@
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\publish\win-x64\dzst.pdb
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\publish\win-x64\dzst.exe

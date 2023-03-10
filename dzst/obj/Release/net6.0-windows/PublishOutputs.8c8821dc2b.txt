@@ -1,0 +1,5 @@
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\publish\dzst.exe
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\publish\dzst.dll
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\publish\dzst.deps.json
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\publish\dzst.runtimeconfig.json
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\publish\dzst.pdb

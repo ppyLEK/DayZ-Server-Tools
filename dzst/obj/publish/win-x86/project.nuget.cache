@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "R4PVfofhZwnqFm6C5om65EOqNbizwZsj5uFTFnHUCwy+v2mLzTLGuAAwHDqzdHiV4fXLg5cSNF5aaiE6G+xIZQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lauri\\OneDrive\\Tiedostot\\GitHub\\dzst\\dzst\\dzst.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lauri\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.12\\microsoft.netcore.app.runtime.win-x86.6.0.12.nupkg.sha512",
+    "C:\\Users\\lauri\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.12\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.12.nupkg.sha512",
+    "C:\\Users\\lauri\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.12\\microsoft.aspnetcore.app.runtime.win-x86.6.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

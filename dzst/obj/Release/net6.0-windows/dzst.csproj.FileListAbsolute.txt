@@ -1,0 +1,15 @@
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\dzst.exe
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\dzst.deps.json
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\dzst.runtimeconfig.json
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\dzst.dll
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\bin\Release\net6.0-windows\dzst.pdb
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\obj\Release\net6.0-windows\dzst.csproj.AssemblyReference.cache
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\obj\Release\net6.0-windows\dzst.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\obj\Release\net6.0-windows\dzst.AssemblyInfoInputs.cache
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\obj\Release\net6.0-windows\dzst.AssemblyInfo.cs
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\obj\Release\net6.0-windows\dzst.csproj.CoreCompileInputs.cache
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\obj\Release\net6.0-windows\dzst.dll
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\obj\Release\net6.0-windows\refint\dzst.dll
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\obj\Release\net6.0-windows\dzst.pdb
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\obj\Release\net6.0-windows\dzst.genruntimeconfig.cache
+C:\Users\lauri\OneDrive\Tiedostot\GitHub\dzst\dzst\obj\Release\net6.0-windows\ref\dzst.dll
