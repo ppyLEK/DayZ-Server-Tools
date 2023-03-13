@@ -74,7 +74,7 @@ namespace dzst
             if (string.IsNullOrEmpty(outputInput))
                 outputInput = "types_output.xml";
             outputFile = outputInput;
-            output = execPath + outputFile;
+            output = execPath+ "/!dzst/" + outputFile;
             Dzst();
         }
         static void Dzst()
@@ -148,7 +148,7 @@ namespace dzst
                 Console.ReadKey(true);
                 Environment.Exit(0);
             }
-            if (File.Exists(outputFile))
+            if (File.Exists(output))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Output file already exists! This program will not overwrite it");
@@ -157,10 +157,10 @@ namespace dzst
                 Console.ReadKey();
                 return;
             }
-            if(!File.Exists(outputFile))   
-                File.Create(outputFile).Close();
+            if(!File.Exists(output))   
+                File.Create(output).Close();
             
-            XmlTextWriter xlW = new XmlTextWriter(outputFile, System.Text.Encoding.UTF8);
+            XmlTextWriter xlW = new XmlTextWriter(output, System.Text.Encoding.UTF8);
 
             XmlWriterSettings wSettings = new XmlWriterSettings();
             wSettings.Indent = true;
@@ -209,7 +209,7 @@ namespace dzst
             xlW.Flush(); xlW.Close();
 
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(outputFile);
+            xmlDoc.Load(output);
             xmlDoc.Save(Console.Out);
             
             if (doDelete)
@@ -217,7 +217,7 @@ namespace dzst
             if (doSilent)
                 Environment.Exit(0);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\nSuccesfully created: " + outputFile.ToString());
+            Console.WriteLine($"\nSuccesfully created: " + output.ToString());
             Console.ResetColor();
             Console.WriteLine($"You can exit now by typing 'exit' or continue running scripts.");
             Console.WriteLine($"Type 'help' to see available commands.");
