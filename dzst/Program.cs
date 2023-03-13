@@ -42,10 +42,10 @@ namespace dzst
         static string execPath = AppDomain.CurrentDomain.BaseDirectory.ToString();
         static string sourceText = execPath + source;
         static string output;
-        static string source = "dzst/source.txt";
+        static string source = "!dzst/source.txt";
         static string outputFile;
 
-        static string typesCfg = "dzst/typesCfg.cfg";
+        static string typesCfg = "!dzst/typesCfg.cfg";
         static string destinationFolder = "keys";
         static int newKeys;
         #endregion
@@ -144,7 +144,7 @@ namespace dzst
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("No typesCfg.cfg detected, please make sure that typesCfg.cfg is in /dzst/ folder!");
+                Console.WriteLine("No typesCfg.cfg detected, please make sure that typesCfg.cfg is in /!dzst/ folder!");
                 Console.ReadKey(true);
                 Environment.Exit(0);
             }
