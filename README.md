@@ -10,7 +10,7 @@ Supports launch arguments:
 
 -t | Creates the types.xml
 
--o | Sets the output file name for types (default: types.xml)
+-o | Sets the output file name for types (default: types_output.xml)
 
 -s | Silent mode, exits the application automatically
 
