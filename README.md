@@ -15,3 +15,6 @@ Supports launch arguments:
 -s | Silent mode, exits the application automatically
 
 -d | Delete mode, deletes the source.txt once types.xml is generated.
+
+
+Do not remove typesCfg.cfg, without it types script wont work!
