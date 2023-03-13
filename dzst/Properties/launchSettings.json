@@ -2,7 +2,6 @@
   "profiles": {
     "dzst": {
       "commandName": "Project",
-      "commandLineArgs": "-t",
       "hotReloadEnabled": false
     }
   }

@@ -6,6 +6,8 @@ using System.Diagnostics.Metrics;
 using System.Xml;
 using System.DirectoryServices.ActiveDirectory;
 using System.IO;
+using System.Text.Unicode;
+using System.Text.RegularExpressions;
 
 namespace dzst
 {
@@ -13,20 +15,6 @@ namespace dzst
     {
 
         #region Strings etc
-        public static string defaultType =
-            "        <nominal>5</nominal>\r\n" +
-            "        <lifetime>7200</lifetime>\r\n" +
-            "        <restock>1800</restock>\r\n" +
-            "        <min>3</min>\r\n" +
-            "        <quantmin>-1</quantmin>\r\n" +
-            "        <quantmax>-1</quantmax>\r\n" +
-            "        <cost>100</cost>\r\n" +
-            "        <flags count_in_cargo=\"0\" count_in_hoarder=\"0\" count_in_map=\"1\" count_in_player=\"0\" crafted=\"0\" deloot=\"0\"/>\r\n" +
-            "        <category name=\"weapons\"/>\r\n" +
-            "        <usage name=\"Military\"/>\r\n" +
-            "        <value name=\"Tier3\"/>\t\r\n" +
-            "        <value name=\"Tier4\"/>\r\n" +
-            "\t</type>";
         public static string helpText =
                 "\nAvailable commands are:\n" +
                 "'help'         - shows this message.\n" +
@@ -37,7 +25,7 @@ namespace dzst
                 
                 "\n\nYou can also use this tool via launch arguments to integrate with mod updates / installs!\n"+
                 "Please read README.MD for more information on how to use launch options. \n" + 
-                "Valid options are: '-k' '-t' '-o' '-d' '-s'";
+                "Valid options are: '-k' '-t' '-o' '-d' '-s'\n";
         public static string noKeysText = 
                 "\nPlease make sure that this .exe is located in the same folder as DayZ_x64.exe or DayZServer_x86.exe";
 
@@ -54,10 +42,10 @@ namespace dzst
         static string execPath = AppDomain.CurrentDomain.BaseDirectory.ToString();
         static string sourceText = execPath + source;
         static string output;
-        static string source = "source.txt";
+        static string source = "dzst/source.txt";
         static string outputFile;
 
-        static string typesCfg = "typesCfg.cfg";
+        static string typesCfg = "dzst/typesCfg.cfg";
         static string destinationFolder = "keys";
         static int newKeys;
         #endregion
@@ -144,11 +132,22 @@ namespace dzst
             
         }
         #region Types
+
+        static string GetTypesCfg(int lineNumber)
+        {
+            string lineReturn = File.ReadLines(execPath + typesCfg).Skip(lineNumber).Take(1).First();
+            return lineReturn;
+        }
         static void Types()
         {
-            if (File.Exists(execPath + typesCfg.ToString()))
-                defaultType = File.ReadAllText(execPath + typesCfg);
-
+            if(!File.Exists(typesCfg))
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("No typesCfg.cfg detected, please make sure that typesCfg.cfg is in /dzst/ folder!");
+                Console.ReadKey(true);
+                Environment.Exit(0);
+            }
             if (File.Exists(outputFile))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -158,47 +157,70 @@ namespace dzst
                 Console.ReadKey();
                 return;
             }
-                    
-
-            using (StreamWriter w = File.AppendText(output))
-            {
-                w.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
-                w.WriteLine("<types>");
-                w.Close();
-            }
+            if(!File.Exists(outputFile))   
+                File.Create(outputFile).Close();
             
+            XmlTextWriter xlW = new XmlTextWriter(outputFile, System.Text.Encoding.UTF8);
+
+            XmlWriterSettings wSettings = new XmlWriterSettings();
+            wSettings.Indent = true;
+            wSettings.ConformanceLevel = ConformanceLevel.Fragment;
+            wSettings.OmitXmlDeclaration = true;
+
+            xlW.Formatting = Formatting.Indented;
+            xlW.WriteStartDocument();
+            xlW.WriteComment("TEST - CHANGE ME - LINE 177");
+
+            xlW.WriteStartElement("types");
             foreach (string line in File.ReadLines(sourceText))
             {
-                
-                using (StreamWriter w = File.AppendText(output))
-                {
-                    w.WriteLine($"\t<type name=\"{line}\">");
-                    w.WriteLine(defaultType);
-                    w.Close();
-                }
-                using (StreamReader sr = File.OpenText(output))
-                {
-                    string s = "";
-                    while ((s = sr.ReadLine()) != null)
-                    {
-                        Console.WriteLine(s);
-                    }
-                }
-            }
-            using (StreamWriter w = File.AppendText(output))
-            {
-                w.WriteLine("</types>");
-                w.Close();
-            }
+                Console.WriteLine("Adding item: "+line);
+                xlW.WriteStartElement("type");
+                xlW.WriteAttributeString("name", line.ToString());
+                xlW.WriteElementString("nominal"         , GetTypesCfg(0));
+                xlW.WriteElementString("lifetime"        , GetTypesCfg(1));
+                xlW.WriteElementString("restock"         , GetTypesCfg(2));
+                xlW.WriteElementString("min"             , GetTypesCfg(3));
+                xlW.WriteElementString("quantmin"        , GetTypesCfg(4));
+                xlW.WriteElementString("quantmax"        , GetTypesCfg(5));
+                xlW.WriteElementString("cost"            , GetTypesCfg(6));
 
+                
+                xlW.WriteElementString("flags count_in_cargo=\"0\" count_in_hoarder=\"0\" count_in_map=\"1\" count_in_player=\"0\" crafted=\"0\" deloot=\"0\"", null);
+                
+                xlW.WriteStartElement("category");
+                xlW.WriteAttributeString("name", GetTypesCfg(7));
+                xlW.WriteEndElement();
+
+
+                xlW.WriteStartElement("usage");
+                xlW.WriteAttributeString("name", GetTypesCfg(8));
+                xlW.WriteEndElement();
+                xlW.WriteStartElement("value");
+                xlW.WriteAttributeString("name", GetTypesCfg(9));
+                xlW.WriteEndElement();
+                xlW.WriteStartElement("value");
+                xlW.WriteAttributeString("name", GetTypesCfg(10));
+                xlW.WriteEndElement();
+
+                xlW.WriteEndElement();
+            }
+            xlW.WriteEndElement();
+            xlW.Flush(); xlW.Close();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(outputFile);
+            xmlDoc.Save(Console.Out);
+            
             if (doDelete)
                 File.Delete(execPath + source);
             if (doSilent)
                 Environment.Exit(0);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Succesfully created: " + outputFile.ToString());
+            Console.WriteLine($"\nSuccesfully created: " + outputFile.ToString());
             Console.ResetColor();
             Console.WriteLine($"You can exit now by typing 'exit' or continue running scripts.");
+            Console.WriteLine($"Type 'help' to see available commands.");
             return;
         }
         #endregion
@@ -207,9 +229,10 @@ namespace dzst
         
         static void Keys()
         {
+            Console.Clear();
             Directory.CreateDirectory(execPath + "keys");
             var files = Directory.GetFiles(execPath, "*.bikey", SearchOption.AllDirectories);
-            
+
             foreach (string bikey in files)
             {
                 foreach (string s in files)
@@ -222,25 +245,29 @@ namespace dzst
                     {
                         newKeys++;
                         File.Copy(s, destFile, true);
-                        Console.WriteLine("DZST - Moved key:'" + fileName + "to the keys folder.");
-                        
+                        Console.WriteLine("Moved key:'" + fileName.ToLower() + " to the keys folder.");
                     }
-
-
                 }
             }
-            if(newKeys == 0)
+
+            if (newKeys == 0)
             {
+                
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("No new keys found.");
                 Console.ResetColor();
             }
-            if(files.Length < 1)
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Done moving keys.");
+            Console.ResetColor();
+
+            if (files.Length < 1)
                 Console.WriteLine(noKeysText);
 
 
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Done moving keys.");
+            
             if (doTypes)
                 Types();
             if(doSilent)
